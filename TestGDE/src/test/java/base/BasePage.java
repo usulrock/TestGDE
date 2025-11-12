@@ -1,0 +1,57 @@
+package base;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class BasePage {
+
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+
+    // Konstruktor
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
+    }
+
+    // Alapvető műveletek
+    protected void click(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        waitUntilVisible(element);
+        element.click();
+    }
+
+    protected void type(WebElement element, String text) {
+        waitUntilClickable(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.sendKeys(text);
+    }
+
+    protected String getText(WebElement element) {
+        waitUntilVisible(element);
+        return element.getText();
+    }
+
+    // Várakozási metódusok
+    protected void waitUntilVisible(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    protected void waitUntilClickable(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    // Egyéb hasznos metódusok
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+}

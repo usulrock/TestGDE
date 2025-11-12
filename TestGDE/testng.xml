@@ -3,7 +3,7 @@
 <suite name="Automatizált Tesztek" parallel="false">
     <test name="Practice Expand Testing tesztek">
         <classes>
-            <class name="Test1"/>
+            <class name="tests.LoginTest"/>
         </classes>
     </test>
 </suite>
