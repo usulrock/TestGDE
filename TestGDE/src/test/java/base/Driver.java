@@ -11,54 +11,55 @@ import java.time.Duration;
 
 public class Driver {
 
-    private static WebDriver driver;
+    // ThreadLocal tárolja a drivert — minden szálnak saját példánya lesz
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    // Privát konstruktor – Singleton minta
     private Driver() {
     }
 
     // Driver példány lekérése
     public static WebDriver getDriver() {
-        if (driver == null) {
+        if (driver.get() == null) {  // szál-specifikus driver lekérése
             String browser = System.getProperty("browser", "chrome");
+            WebDriver webDriver;
+
             switch (browser.toLowerCase()) {
                 case "firefox":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    firefoxOptions.addPreference("dom.webnotifications.enabled", false); // értesítések tiltása
+                    firefoxOptions.addPreference("dom.webnotifications.enabled", false);
                     firefoxOptions.addArguments("--width=1920", "--height=1080");
-                    driver = new FirefoxDriver(firefoxOptions);
+                    webDriver = new FirefoxDriver(firefoxOptions);
                     break;
 
                 case "chrome":
                 default:
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--start-maximized");  // ablak kinagyítása
-                    chromeOptions.addArguments("--disable-notifications"); // értesítések tiltása
-                    chromeOptions.addArguments("--disable-popup-blocking"); // felugró ablakok letiltása
-                    chromeOptions.addArguments("--disable-features=SidePanelPinning"); // oldalsáv letiltása
-                    chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"}); // infobar eltávolítása
-                    //chromeOptions.addArguments("--headless=new"); // headless futtatás
+                    chromeOptions.addArguments("--start-maximized");
+                    chromeOptions.addArguments("--disable-notifications");
+                    chromeOptions.addArguments("--disable-popup-blocking");
+                    chromeOptions.addArguments("--disable-features=SidePanelPinning");
+                    chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                    //chromeOptions.addArguments("--headless=new");
 
-                    // Példa capability hozzáadására
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
                     chromeOptions.merge(capabilities);
 
-                    driver = new ChromeDriver(chromeOptions);
+                    webDriver = new ChromeDriver(chromeOptions);
                     break;
             }
 
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.set(webDriver); // szálhoz hozzárendeljük a drivert
         }
-        return driver;
+        return driver.get();
     }
 
     // Driver bezárása
     public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+        if (driver.get() != null) {
+            driver.get().quit();
+            driver.remove();
         }
     }
 }
-

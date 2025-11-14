@@ -37,4 +37,18 @@
             <version>2.21.0</version>
         </dependency>
     </dependencies>
+
+    <!-- TestNG profilok -->
+    <profiles>
+        <!-- Aktív profile by default -->
+        <profile>
+            <id>testng</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <testng.path>src/test/java/testng/testng.xml</testng.path>
+            </properties>
+        </profile>
+    </profiles>
 </project>

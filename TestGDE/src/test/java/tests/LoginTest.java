@@ -19,12 +19,21 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void failedLoginTest() throws InterruptedException {
+    public void failedLoginUsernameTest() throws InterruptedException {
         driver.get("https://practice.expandtesting.com/login");
         Thread.sleep(10000);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("wrongUserName", UserData.PASSWORD);
-        Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Bejelentkezés sikeres!");
+        Assert.assertTrue(loginPage.isErrorMessageDisplayed("username"), "Bejelentkezés sikeres pedig sikertelent vártunk!");
+    }
+
+    @Test
+    public void failedLoginPasswordTest() throws InterruptedException {
+        driver.get("https://practice.expandtesting.com/login");
+        Thread.sleep(10000);
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(UserData.USERNAME, "wrongPassword");
+        Assert.assertTrue(loginPage.isErrorMessageDisplayed("password"), "Bejelentkezés sikeres pedig sikertelent vártunk!");
     }
 }
 
