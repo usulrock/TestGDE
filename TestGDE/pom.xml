@@ -37,7 +37,6 @@
             <version>2.21.0</version>
         </dependency>
     </dependencies>
-
     <!-- TestNG profilok -->
     <profiles>
         <!-- Aktív profile by default -->
@@ -47,8 +46,22 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <testng.path>src/test/java/testng/testng.xml</testng.path>
+                <testng.path>src/test/resources/testng.xml</testng.path>
             </properties>
         </profile>
     </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

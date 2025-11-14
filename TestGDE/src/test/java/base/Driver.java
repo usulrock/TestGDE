@@ -11,16 +11,15 @@ import java.time.Duration;
 
 public class Driver {
 
-    // ThreadLocal tárolja a drivert — minden szálnak saját példánya lesz
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     private Driver() {
     }
 
-    // Driver példány lekérése
     public static WebDriver getDriver() {
         if (driver.get() == null) {  // szál-specifikus driver lekérése
             String browser = System.getProperty("browser", "chrome");
+            System.setProperty("webdriver.chrome.driver", "src/test/java/base/webdrivers/chromedriver.exe");
             WebDriver webDriver;
 
             switch (browser.toLowerCase()) {
@@ -34,12 +33,12 @@ public class Driver {
                 case "chrome":
                 default:
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--start-maximized");
-                    chromeOptions.addArguments("--disable-notifications");
-                    chromeOptions.addArguments("--disable-popup-blocking");
-                    chromeOptions.addArguments("--disable-features=SidePanelPinning");
-                    chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-                    //chromeOptions.addArguments("--headless=new");
+                    chromeOptions.addArguments("--start-maximized");  //ablak kinagyítása
+                    chromeOptions.addArguments("--disable-notifications");  //értesítések letiltása
+                    chromeOptions.addArguments("--disable-popup-blocking");  //felugró ablakok letiltása
+                    chromeOptions.addArguments("--disable-features=SidePanelPinning");  //oldalpanel letiltása
+                    chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});  //infobar üzenet eltüntetése
+                    //chromeOptions.addArguments("--headless=new"); //headless mód engedélyezése
 
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);

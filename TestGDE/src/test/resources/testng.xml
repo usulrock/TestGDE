@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Automatizált Tesztek" parallel="tests" thread-count="10">
+    <test name="Successful Login Test">
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="successfulLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Failed Login Test - Username">
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="failedLoginUsernameTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Failed Login Test - Password">
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="failedLoginPasswordTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

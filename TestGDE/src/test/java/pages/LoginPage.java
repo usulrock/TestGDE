@@ -49,7 +49,6 @@ public class LoginPage extends BasePage {
     @Step("Sikeres bejelentkezés ellenőrzése a logout gomb megjelenésével és az üzenettel")
     public boolean isErrorMessageDisplayed(String credentialType) {
         waitUntilVisible(alertMessage);
-        System.out.println("Test: "+ getText(alertMessage));
         return getText(alertMessage).contains("Your "+ credentialType + " is invalid!");
     }
 }
