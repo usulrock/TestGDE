@@ -14,14 +14,12 @@ public class BasePage {
     protected WebDriverWait wait;
     private static final Logger logger = LogManager.getLogger();
 
-    // Konstruktor
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
-    // Alapvető műveletek
     protected void click(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         waitUntilVisible(element);
@@ -39,7 +37,6 @@ public class BasePage {
         return element.getText();
     }
 
-    // Várakozási metódusok
     protected void waitUntilVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }

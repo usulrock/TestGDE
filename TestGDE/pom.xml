@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
@@ -9,20 +11,21 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <!-- Selenium WebDriver -->
+        <!-- Selenium WebDriver for browser automation -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.14.0</version>
         </dependency>
 
-        <!-- TestNG -->
+        <!-- TestNG testing framework -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -30,42 +33,43 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Allure TestNG adapter -->
+        <!-- Allure TestNG adapter for reports -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>2.21.0</version>
         </dependency>
-        <!-- SLF4J API -->
+
+        <!-- SLF4J API (logging interface) -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version> <!-- legfrissebb stabil SLF4J -->
+            <version>2.0.9</version>
         </dependency>
 
-        <!-- Log4j2 implementáció -->
+        <!-- Log4j2 core library -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.25.2</version>
         </dependency>
 
+        <!-- Log4j2 API -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.25.2</version>
         </dependency>
 
-        <!-- SLF4J -> Log4j2 bridge -->
+        <!-- SLF4J to Log4j2 bridge -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.25.2</version>
         </dependency>
     </dependencies>
-    <!-- TestNG profilok -->
+
     <profiles>
-        <!-- Aktív profile by default -->
         <profile>
             <id>testng</id>
             <activation>
@@ -76,8 +80,10 @@
             </properties>
         </profile>
     </profiles>
+
     <build>
         <plugins>
+            <!-- Maven Surefire Plugin to run TestNG tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -90,4 +96,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
