@@ -13,11 +13,8 @@ public class Driver {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private Driver() {
-    }
-
     public static WebDriver getDriver() {
-        if (driver.get() == null) {  // szál-specifikus driver lekérése
+        if (driver.get() == null) {
             String browser = System.getProperty("browser", "chrome");
             System.setProperty("webdriver.chrome.driver", "src/test/java/base/webdrivers/chromedriver.exe");
             WebDriver webDriver;
@@ -49,7 +46,7 @@ public class Driver {
             }
 
             webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.set(webDriver); // szálhoz hozzárendeljük a drivert
+            driver.set(webDriver); // thread-hez hozzárendeljük a drivert
         }
         return driver.get();
     }

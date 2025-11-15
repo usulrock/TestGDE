@@ -36,6 +36,32 @@
             <artifactId>allure-testng</artifactId>
             <version>2.21.0</version>
         </dependency>
+        <!-- SLF4J API -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version> <!-- legfrissebb stabil SLF4J -->
+        </dependency>
+
+        <!-- Log4j2 implementáció -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.25.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.25.2</version>
+        </dependency>
+
+        <!-- SLF4J -> Log4j2 bridge -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.25.2</version>
+        </dependency>
     </dependencies>
     <!-- TestNG profilok -->
     <profiles>
