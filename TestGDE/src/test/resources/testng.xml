@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Automatizált Tesztek" parallel="tests" thread-count="10">
+    <listeners>
+        <listener class-name="utils.Retry"/>
+    </listeners>
+    <test name="Successful Login Test chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="successfulLoginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Failed Login Test - Username chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="failedLoginUsernameTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Failed Login Test - Password chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="failedLoginPasswordTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
     <test name="Successful Login Test">
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="tests.LoginTest">
                 <methods>
@@ -12,6 +48,7 @@
     </test>
 
     <test name="Failed Login Test - Username">
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="tests.LoginTest">
                 <methods>
@@ -22,6 +59,7 @@
     </test>
 
     <test name="Failed Login Test - Password">
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="tests.LoginTest">
                 <methods>

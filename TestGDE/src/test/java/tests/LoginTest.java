@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.TestData;
@@ -10,6 +11,7 @@ import utils.TestData;
 public class LoginTest extends BaseTest {
 
     @Test(description = "Sikeres bejelentkezés")
+    @Parameters("browser")
     public void successfulLoginTest() {
         driver.get(TestData.LOGIN_PAGE);
         LoginPage loginPage = new LoginPage(driver);
@@ -18,6 +20,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(description = "Sikertelen bejelentkezés helytelen felhasználónévvel")
+    @Parameters("browser")
     public void failedLoginUsernameTest() {
         driver.get(TestData.LOGIN_PAGE);
         LoginPage loginPage = new LoginPage(driver);
@@ -26,6 +29,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(description = "Sikertelen bejelentkezés helytelen jelszóval")
+    @Parameters("browser")
     public void failedLoginPasswordTest() {
         driver.get(TestData.LOGIN_PAGE);
         LoginPage loginPage = new LoginPage(driver);
